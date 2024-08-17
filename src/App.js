@@ -34,11 +34,34 @@ function App() {
     });
   };
 
+  const date = new Date();
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const today = `${date.getDate()} ${monthNames[date.getMonth()]}`;
+
   useEffect(() => {
     getCurrLocation();
   }, []);
 
-  return <div className='container'></div>;
+  return (
+    <div className='container'>
+      <div>
+        <span className='today'>{`Today ${today}`}</span>
+      </div>
+    </div>
+  );
 }
 
 export default App;
