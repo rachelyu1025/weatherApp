@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import SelectBox from './components/SelectBox';
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({
@@ -9,6 +10,7 @@ function App() {
   });
 
   const [weather, setWeather] = useState();
+  const [city, setCity] = useState('');
 
   // 현재 위치정보에 따른 날씨 정보 호출 함수
   const getWeatherByCurrLocation = async (lat, lon) => {
@@ -51,6 +53,10 @@ function App() {
   ];
   const today = `${date.getDate()} ${monthNames[date.getMonth()]}`;
 
+  const handleSelect = (e) => {
+    setCity(e.target.value);
+  };
+
   useEffect(() => {
     getCurrLocation();
   }, []);
@@ -59,6 +65,12 @@ function App() {
     <div className='container'>
       <div>
         <span className='today'>{`Today ${today}`}</span>
+
+        <div className='selectbox-container'>
+          <SelectBox city={city} onChange={handleSelect} />
+
+          <button>Current</button>
+        </div>
       </div>
     </div>
   );
