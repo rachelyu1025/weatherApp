@@ -14,9 +14,14 @@ function App() {
   const [weather, setWeather] = useState();
   const [city, setCity] = useState('');
 
+  const temperature = {
+    celcius: Math.floor(weather?.main.temp),
+    fahrenheit: Math.floor(weather?.main.temp * 1.8 + 32),
+  };
+
   // 현재 위치정보에 따른 날씨 정보 호출 함수
   const getWeatherByCurrLocation = async (lat, lon) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`;
     const response = await axios.get(url).then((res) => res.data);
 
     setWeather((prev) => response);
@@ -65,6 +70,7 @@ function App() {
 
   return (
     <div className='container'>
+      {/* header */}
       <div>
         <span className='today'>{`Today ${today}`}</span>
 
@@ -75,17 +81,27 @@ function App() {
         </div>
       </div>
 
-      <div>
+      {/* weather image */}
+      <div className='image-container'>
         <img src={`/assets/wind.jpeg`} alt='' className='image' />
       </div>
 
+      {/* weather Info */}
       <div className='weather-info-container'>
-        <span>Sunny</span>
-        <span>{`${Math.floor(weather?.main.temp - 273.15)}°`}</span>
+        <span className='weather-type'>{weather?.weather[0].main}</span>
 
+        {/* temperature */}
+        <div className='weather-temp-container'>
+          <span className='weather-temp'>{temperature.celcius}</span>
+          <span className='weather-temp-type'>°C / </span>
+          <span className='weather-temp'>{temperature.fahrenheit}</span>
+          <span className='weather-temp-type'>°F</span>
+        </div>
+
+        {/* wind speed & rain/1h */}
         <div>
           <FontAwesomeIcon icon={faWind} />
-          <span>{`${weather?.wind.speed}km/h`}</span>
+          <span>{` ${weather?.wind.speed} km/h`}</span>
         </div>
         {weather?.rain && (
           <div>
