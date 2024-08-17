@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import './App.css';
 import SelectBox from './components/SelectBox';
@@ -23,7 +23,7 @@ function App() {
   };
 
   // 현재 위치정보 호출 함수
-  const getCurrLocation = () => {
+  const getCurrLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
@@ -31,7 +31,7 @@ function App() {
       // 현재 날씨 호출
       getWeatherByCurrLocation(latitude, longitude);
     });
-  };
+  }, []);
 
   const date = new Date();
   const monthNames = [
@@ -56,7 +56,7 @@ function App() {
 
   useEffect(() => {
     getCurrLocation();
-  }, []);
+  }, [getCurrLocation]);
 
   return (
     <div className='container'>
