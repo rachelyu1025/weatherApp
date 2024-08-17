@@ -4,4 +4,44 @@
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: skyblue;
+  padding: 15px;
+}
+
+.selectbox-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.selectbox {
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.image {
+  width: 100%;
+}
+
+.weather-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 50%;
+}
+
+.today {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.3rem;
 }

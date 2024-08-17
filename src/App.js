@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import SelectBox from './components/SelectBox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDroplet, faWind } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState({
@@ -71,6 +73,27 @@ function App() {
 
           <button>Current</button>
         </div>
+      </div>
+
+      <div>
+        <img src={`/assets/wind.jpeg`} alt='' className='image' />
+      </div>
+
+      <div className='weather-info-container'>
+        <span>Sunny</span>
+        <span>{`${Math.floor(weather?.main.temp - 273.15)}°`}</span>
+
+        <div>
+          <FontAwesomeIcon icon={faWind} />
+          <span>{`${weather?.wind.speed}km/h`}</span>
+        </div>
+        {weather?.rain && (
+          <div>
+            <FontAwesomeIcon icon={faDroplet} />
+            <span>{`${weather.rain}%`}</span>
+          </div>
+        )}
+        {/* 풍량, 강수량 */}
       </div>
     </div>
   );
