@@ -6,11 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDroplet, faWind } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
-  const [currentLocation, setCurrentLocation] = useState({
-    latitude: 0,
-    longitude: 0,
-  });
-
   const [weather, setWeather] = useState();
   const [city, setCity] = useState('');
 
@@ -32,11 +27,6 @@ function App() {
     navigator.geolocation.getCurrentPosition((position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
-
-      setCurrentLocation((prev) => ({
-        latitude,
-        longitude,
-      }));
 
       // 현재 날씨 호출
       getWeatherByCurrLocation(latitude, longitude);
