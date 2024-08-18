@@ -4,6 +4,7 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDroplet, faWind } from '@fortawesome/free-solid-svg-icons';
 import Select from './components/Select';
+import WeatherImage from './components/WeatherImage';
 
 function App() {
   const [weather, setWeather] = useState();
@@ -67,10 +68,7 @@ function App() {
         <Select city={city} setCity={setCity} />
       </div>
 
-      {/* weather image */}
-      <div className='image-container'>
-        <img src={`/assets/wind.jpeg`} alt='' className='image' />
-      </div>
+      <WeatherImage mainState={weather?.weather[0].main} />
 
       {/* weather Info */}
       <div className='weather-info-container'>
