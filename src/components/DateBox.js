@@ -20,11 +20,7 @@ const DateBox = () => {
 
   const today = `${date.getDate()} ${monthNames[date.getMonth()]}`;
 
-  return (
-    <div>
-      <span className='today'>{`Today ${today}`}</span>;
-    </div>
-  );
+  return <span className='today'>{`Today ${today}`}</span>;
 };
 
 export default DateBox;
