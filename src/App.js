@@ -1,13 +1,13 @@
 import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import './App.css';
-import SelectBox from './components/SelectBox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDroplet, faWind } from '@fortawesome/free-solid-svg-icons';
+import Select from './components/Select';
 
 function App() {
   const [weather, setWeather] = useState();
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState(null);
 
   const temperature = {
     celcius: Math.floor(weather?.main.temp),
@@ -50,13 +50,13 @@ function App() {
   ];
   const today = `${date.getDate()} ${monthNames[date.getMonth()]}`;
 
-  const handleSelect = (e) => {
-    setCity(e.target.value);
-  };
-
   useEffect(() => {
-    getCurrLocation();
-  }, [getCurrLocation]);
+    if (city) {
+      getWeatherByCurrLocation(city.lat, city.lon);
+    } else {
+      getCurrLocation();
+    }
+  }, [getCurrLocation, city]);
 
   return (
     <div className='container'>
@@ -64,11 +64,7 @@ function App() {
       <div>
         <span className='today'>{`Today ${today}`}</span>
 
-        <div className='selectbox-container'>
-          <SelectBox city={city} onChange={handleSelect} />
-
-          <button>Current</button>
-        </div>
+        <Select city={city} setCity={setCity} />
       </div>
 
       {/* weather image */}
