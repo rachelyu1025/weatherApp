@@ -61,8 +61,7 @@ function App() {
 
   return (
     <div className='container'>
-      {/* header */}
-      <div>
+      <div className='header'>
         <span className='today'>{`Today ${today}`}</span>
 
         <Select city={city} setCity={setCity} />
@@ -90,7 +89,7 @@ function App() {
         {weather?.rain && (
           <div>
             <FontAwesomeIcon icon={faDroplet} />
-            <span>{`${weather.rain}%`}</span>
+            <span>{` ${weather.rain['1h']} %`}</span>
           </div>
         )}
         {/* 풍량, 강수량 */}
