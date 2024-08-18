@@ -42,7 +42,7 @@ function App() {
       <div className='header'>
         <DateBox />
 
-        <Select city={city} setCity={setCity} />
+        <Select city={city} setCity={setCity} current={weather?.name} />
       </div>
 
       <WeatherImage mainState={weather?.weather[0].main} />

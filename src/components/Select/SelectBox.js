@@ -1,8 +1,6 @@
 import React from 'react';
 
-const SelectBox = (props) => {
-  const { city, setCity } = props;
-
+const SelectBox = ({ city, setCity, current }) => {
   const selectList = [
     {
       value: 'Seoul',
@@ -42,9 +40,11 @@ const SelectBox = (props) => {
       className='selectbox'
       value={city ? city.name : ''}
       onChange={handleSelect}
-      defaultValue={'Current'}
+      defaultValue={''}
     >
-      <option value={'Current'}>{`Current`}</option>
+      <option value={''} disabled>
+        {city === null && current ? current : ''}
+      </option>
 
       {selectList.map((li, idx) => (
         <option value={li.value} key={idx}>
